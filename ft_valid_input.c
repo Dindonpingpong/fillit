@@ -3,72 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   ft_valid_input.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkina <rkina@student.42.fr>                +#+  +:+       +#+        */
+/*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/17 21:52:44 by rkina             #+#    #+#             */
-/*   Updated: 2019/10/17 21:55:28 by rkina            ###   ########.fr       */
+/*   Created: 2019/10/19 17:05:56 by rkina             #+#    #+#             */
+/*   Updated: 2019/10/25 19:41:38 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./libft/libft.h"
-#include <fcntl.h>
+#include "fillit.h" 
 
-static int		ft_check_dot_diez(char c)
+int		ft_valid_input(const int fd)
 {
-	return(c == '.' || c == '#');
-}
+	char	*line;
+	int		count;
+	int		j;
+	int		i;
 
-int		ft_valid_input(int ac, char **argv)
-{
-	int fd;
-	char *line;
-	int gnl;
-	gnl = 1;
-	int count;
-	count = 1;
-	int j;
-
-	if (ac > 2)
+	count = 0;
+	i = 0;
+	while (get_next_line(fd, &line) > 0)
 	{
-		ft_putendl("error");
-		exit (0);
-	}
-	if (ac == 2)
-	{
-		fd = open(argv[1], O_RDONLY);
-		while (gnl > 0)
+		if (++count % 5 != 0)
 		{
-			gnl = get_next_line(fd, &line);
-			if (count % 5 != 0)
+			ft_strlen(line) != 4 ? ft_error_output() : line;
+			j = -1;
+			while (line[++j])
 			{
-				if (ft_strlen(line) != 4)
-				{
-					ft_putendl("error1");
-					free(line);
-					exit (0);
-				}
-				j = 0;
-				while (line[j])
-				{
-					if (!(ft_check_dot_diez(line[j])))
-					{
-						ft_putendl("error2");
-						free(line);
-						exit (0);
-					}
-					j++;
-				}
+				line[j] == '.' || line[j] == '#' ? line[j] : ft_error_output();
+				line[j] == '#' ? i++ : i;
 			}
-			if ((count % 5 == 0) && line[j] != '\0')
-			{
-				ft_putendl("error3");
-				free(line);
-				exit (0);
-			}
-			printf("%s\n", line);
-			printf("count = %d\n", count);
-			count++;
 		}
-		close(fd);
+		(count % 5 == 0) && line[j] != '\0' ? ft_error_output() : line[j];
+//		free(line);
 	}
+	i % 4 != 0 ? ft_error_output() : i;
+	count + 1 > 130 ? ft_error_output() : count;
+	return (i);
 }

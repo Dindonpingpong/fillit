@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rkina <rkina@student.42.fr>                +#+  +:+       +#+         #
+#    By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/04 19:08:21 by rkina             #+#    #+#              #
-#    Updated: 2019/10/17 20:44:08 by rkina            ###   ########.fr        #
+#    Updated: 2019/10/22 21:20:39 by npetrell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,8 @@ ft_strlen.c ft_strmap.c ft_strmapi.c ft_strncat.c \
 ft_strncmp.c ft_strncpy.c ft_strnequ.c ft_strnew.c \
 ft_strnstr.c ft_strrchr.c ft_strrev.c ft_strsplit.c \
 ft_strstr.c ft_strsub.c ft_strtrim.c ft_swap.c \
-ft_tolower.c ft_toupper.c ft_putstr_fd.c ft_strndup.c get_next_line.c\
+ft_tolower.c ft_toupper.c ft_putstr_fd.c ft_strndup.c \
+get_next_line.c ft_error_output.c ft_sqrt.c ft_iterative_factorial.c \
 
 OBJECTS = $(SRCS:%.c=%.o)
 
