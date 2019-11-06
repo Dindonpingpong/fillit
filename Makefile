@@ -6,7 +6,7 @@
 #    By: rkina <rkina@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/20 13:59:08 by npetrell          #+#    #+#              #
-#    Updated: 2019/11/06 18:36:31 by rkina            ###   ########.fr        #
+#    Updated: 2019/11/06 21:26:39 by rkina            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,8 @@ SRCS = ./ft_valid_input.c ./ft_valid_corr_tet.c ./main.c \
 OBJS = $(SRCS:%.c=%.o)
 
 INCLUDES = libft/includes
+
+.PHONY: all clean fclean re
 
 all: $(NAME)
 
