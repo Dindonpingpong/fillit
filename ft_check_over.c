@@ -6,7 +6,7 @@
 /*   By: rkina <rkina@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 18:51:27 by rkina             #+#    #+#             */
-/*   Updated: 2019/11/02 22:40:42 by rkina            ###   ########.fr       */
+/*   Updated: 2019/11/05 15:20:31 by rkina            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int		ft_overlay(int *coords, int nbr_tet)
 	int j;
 
 	n_check = nbr_tet - 1;
+	if (nbr_tet == 1)
+		return (0);
 	while (n_check > -1)
 	{
 		j = (nbr_tet - 1) * 8;
@@ -38,16 +40,16 @@ int		ft_overlay(int *coords, int nbr_tet)
 	return (0);
 }
 
-int		ft_check_over_map(int *crds, int nbrs_tet, int min_size)
+int		ft_check_over_map(int *crds, int nbrs_tet, int min_size, char x_y)
 {
 	int	i;
 
-	i = (nbrs_tet - 1) * 8;
+	i = (x_y == 'x') ? ((nbrs_tet - 1) * 8) : ((nbrs_tet - 1) * 8 + 1);
 	while (i < nbrs_tet * 8)
 	{
-		if (crds[i] > min_size || crds[i + 1] > min_size)
+		if (crds[i] > min_size)
 			return (1);
-		i++;
+		i += 2;
 	}
 	return (0);
 }

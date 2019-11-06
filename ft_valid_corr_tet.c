@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_valid_corr_tet.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rkina <rkina@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 21:56:11 by rkina             #+#    #+#             */
-/*   Updated: 2019/10/25 20:26:14 by npetrell         ###   ########.fr       */
+/*   Updated: 2019/11/06 12:35:41 by rkina            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,16 +60,16 @@ char		*ft_valid_tetra(const int fd)
 	{
 		tmp = tetra;
 		tetra = ft_strjoin(tetra, line);
-		free(tmp);
-		free(line);
+		//free(tmp);
+		//free(line);
 	}
 	while (tetra[i])
 	{
 		tmp1 = ft_strsub(&tetra[i], 0, 16);
 		i += 16;
 		ft_valid_corr_tet(tmp1);
-		free(tmp1);
+	//	free(tmp1);
 	}
-	free(tetra);
+	//free(tetra);
 	return (tetra);
 }

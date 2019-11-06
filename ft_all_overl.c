@@ -6,78 +6,61 @@
 /*   By: rkina <rkina@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 23:17:08 by rkina             #+#    #+#             */
-/*   Updated: 2019/11/03 22:42:02 by rkina            ###   ########.fr       */
+/*   Updated: 2019/11/06 14:10:52 by rkina            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 #include <stdio.h>
 
-void	ft_ans(int *coords, int size, int end)
+int	ft_ans(int *coords, int size, int start)
 {
-	int start, leaf, i, n;
-
-	leaf = 2;
-	start = 2;
-	i = 0;
-	int j;
-	n = 0;
-	while (i != -3)
+	while (!(ft_check_over_map(coords, start, size, 'y')))
 	{
-		while (start <= end)
+		while (!(ft_check_over_map(coords, start, size, 'x')))
 		{
-			if (!(ft_solve(coords, size, start)))
+			if (!(ft_overlay(coords, start)))
 			{
-				if (start == end)
+				start++;
+				printf("%d",start);
+				if (!(ft_ans(coords, size, start)))
 				{
-					printf("swap %d\n", end);
-					if (n == 2)
-					{
-						ft_swap_tet(coords, start - 1, start + 1);
-					}
-					else
-						ft_swap_tet(coords, end - 1, end);
-					n++;
-					j++;
+					return (1);
 				}
 				else
 				{
-					ft_swap_tet(coords, start, start + 1);
+					start--;
 				}
-				//start = 2;
-				i = -1;
-				break ;
 			}
-			start++;
-			i++;
+			ft_move(coords, start, 'x');
 		}
-		if (i > -1)
-			i = -3;
-		if ((leaf == end) && (i == -1))
-		{
-			size++;
-			ft_ans(coords, size, end);
-			break ;
-		}
-		if ((leaf < end) && (i == -1))
-		{
-			j = 0;
-			i = 0;
-			start = 2;
-			ft_swap_tet(coords, 1, leaf);
-			leaf++;
-		}
+		ft_move_zero_position_x(coords, start);
+		ft_move(coords, start, 'y');
 	}
+	ft_move_zero_position_all(coords, 2);
+	return (0);
 }
 
-void	ft_all_overl(t_flist **head, int *coord_of_sharp, int min_size, int nbrs_tetra)
+int		ft_solve(int *coords, int start, int size, int len)
 {
-	if (nbrs_tetra == 1)
+	while (!(ft_ans(coords, size, start)))
+	{
+		ft_move_zero_position_all(coords, len);
+		size++;
+	}
+	return (0);
+}
+
+int	ft_all_overl(t_flist **head, int *coord_of_sharp, int min_size, int nbrs_tetra)
+{
+	int start;
+
+	start  = 1;
+	if (nbrs_tetra == 19)
 		ft_add_to_fin_list(head, coord_of_sharp, nbrs_tetra, min_size);
 	else
 	{
-		ft_ans(coord_of_sharp, min_size, nbrs_tetra);
-		//print map
+		ft_solve(coord_of_sharp, start, min_size, nbrs_tetra);
 	}
-//----------------------------------------------------------------------------------------
+	return (0);
 }
