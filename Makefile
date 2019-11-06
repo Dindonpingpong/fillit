@@ -6,31 +6,45 @@
 #    By: rkina <rkina@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/20 13:59:08 by npetrell          #+#    #+#              #
-#    Updated: 2019/11/05 15:39:00 by rkina            ###   ########.fr        #
+#    Updated: 2019/11/06 18:36:31 by rkina            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fillit
 
+LIBFT = libft
+
+CFLAGS = -g -Wall -Wextra -Werror
+
+LFLAGS = -L $(LIBFT) -lft
+
+CC = gcc
+
 SRCS = ./ft_valid_input.c ./ft_valid_corr_tet.c ./main.c \
- ./add_link_list.c ./ft_count_min_s.c ./ft_change_to_coord.c \
+ ./ft_add_link_list.c ./ft_count_min_s.c ./ft_change_to_coord.c \
 ./ft_move.c  ./ft_create_map.c ./ft_check_over.c  \
-./ft_all_overl.c
+./ft_fillit.c
 
+OBJS = $(SRCS:%.c=%.o)
 
-OBJECTS=$(SRCS:%.c=%.o)
+INCLUDES = libft/includes
 
-HEADERS = ./fillit.h
+all: $(NAME)
 
-LIB = -L./libft/ -lft 
- 
-all: $(NAME) $(fillit)
+$(NAME): $(OBJS)
+	make -C $(LIBFT)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LFLAGS)
 
-fillit: 
-		gcc -Wall -Wextra -Werror -I $(HEADERS) $(SRCS) $(LIB) -o $(NAME)
+%.o: %.c
+	$(CC) $(CFLAGS) -I $(INCLUDES) -o $@ -c $<
 
-clean: 
-		rm -f $(OBJECTS)
+clean:
+	rm -rf $(OBJS)
+	make -C $(LIBFT) clean
+
 fclean: clean
-		rm -f $(NAME)
-re: clean all
+	rm -rf $(NAME)
+	make -C $(LIBFT) fclean
+
+re: fclean all
+  

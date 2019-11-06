@@ -6,13 +6,14 @@
 /*   By: rkina <rkina@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 21:31:26 by npetrell          #+#    #+#             */
-/*   Updated: 2019/11/06 12:37:30 by rkina            ###   ########.fr       */
+/*   Updated: 2019/11/06 18:12:07 by rkina            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 #include <stdio.h>
-int			*ft_change_to_coord(char *tetra, int count_sharp) // зафришить
+
+int			*ft_change_to_coord(char *tetra, int count_sharp)
 {
 	int		*coord_of_sharp;
 	int		i;
@@ -82,25 +83,6 @@ int				*ft_move_zero_position_x(int *coord, int nbr_tet)
 	{
 		coord[i] -= min_x;
 		i += 2;
-	}
-	return (coord);
-}
-
-int		*ft_swap_tet(int *coord, int a, int b)
-{
-	int tmp;
-	int i;
-	int j;
-
-	i = (a - 1) * 8;
-	j = (b - 1) * 8;
-	while (i < a * 8)
-	{
-		tmp = coord[i];
-		coord[i] = coord[j];
-		coord[j] = tmp;
-		j++;
-		i++;
 	}
 	return (coord);
 }

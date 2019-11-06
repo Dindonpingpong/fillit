@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   add_link_list.c                                    :+:      :+:    :+:   */
+/*   ft_add_link_list.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rkina <rkina@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 17:37:27 by npetrell          #+#    #+#             */
-/*   Updated: 2019/10/28 19:00:09 by npetrell         ###   ########.fr       */
+/*   Updated: 2019/11/06 18:23:02 by rkina            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 #include <stdio.h>
 
-void         create_flist(t_flist **head, char name_tetra)
+void			create_flist(t_flist **head, char name_tetra)
 {
-    t_flist	*new_node;
-	t_flist	*tmp;
+	t_flist		*new_node;
+	t_flist		*tmp;
 
-    new_node = (t_flist*)malloc(sizeof(t_flist));
-    new_node->name = name_tetra;
+	new_node = (t_flist*)malloc(sizeof(t_flist));
+	new_node->name = name_tetra;
 	new_node->next = *head;
 	tmp = *head;
 	*head = new_node;
-//	free(tmp);
 }
-
 
 int				*ft_move_zero_position_all(int *coord, int len)
 {
@@ -56,11 +54,11 @@ int				*ft_move_zero_position_all(int *coord, int len)
 }
 
 void			ft_create_flist(int count_sharp, int *coord_of_sharp,
- t_flist **head)
+	t_flist **head)
 {
-	int	    	count_tetra;
-	int	    	i;
-	char	    name_tetra;
+	int			count_tetra;
+	int			i;
+	char		name_tetra;
 
 	name_tetra = 'A';
 	count_tetra = count_sharp / 4;
@@ -71,7 +69,7 @@ void			ft_create_flist(int count_sharp, int *coord_of_sharp,
 		create_flist(head, name_tetra);
 		while (i < 8)
 		{
-			(*head)->crd_sharp[i]= *coord_of_sharp;
+			(*head)->crd_sharp[i] = *coord_of_sharp;
 			coord_of_sharp++;
 			i++;
 		}

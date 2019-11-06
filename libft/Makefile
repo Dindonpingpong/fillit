@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+         #
+#    By: rkina <rkina@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/04 19:08:21 by rkina             #+#    #+#              #
-#    Updated: 2019/10/22 21:20:39 by npetrell         ###   ########.fr        #
+#    Updated: 2019/11/06 18:34:59 by rkina            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,10 @@ get_next_line.c ft_error_output.c ft_sqrt.c ft_iterative_factorial.c \
 
 OBJECTS = $(SRCS:%.c=%.o)
 
-HEADERS = ./libft.h
+HEADERS = includes
+
+vpath %.c srcs
+vpath %.h includes
 
 GCCF = -Wall -Wextra -Werror
 
