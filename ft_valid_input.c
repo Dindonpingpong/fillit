@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_valid_input.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkina <rkina@student.42.fr>                +#+  +:+       +#+        */
+/*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/19 17:05:56 by rkina             #+#    #+#             */
-/*   Updated: 2019/11/06 18:20:04 by rkina            ###   ########.fr       */
+/*   Updated: 2019/11/07 19:49:19 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ int		ft_valid_input(const int fd)
 				line[j] == '#' ? i++ : i;
 			}
 		}
-		(count % 5 == 0) && line[j] != '\0' ? ft_error_output() : line[j];
+	//	(count % 5 == 0) && line[j] != '\0' ? ft_error_output() : line[j]; // there is a mistake
+		free(line);
 	}
 	i % 4 != 0 ? ft_error_output() : i;
 	count + 1 > 130 ? ft_error_output() : count;

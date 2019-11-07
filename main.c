@@ -6,7 +6,7 @@
 /*   By: rkina <rkina@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 21:52:44 by rkina             #+#    #+#             */
-/*   Updated: 2019/11/06 18:26:26 by rkina            ###   ########.fr       */
+/*   Updated: 2019/11/07 20:45:05 by rkina            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,14 @@ int				main(int ac, char **argv)
 		tetra = ft_valid_tetra(fd);
 		close(fd);
 		coords_of_sharp = ft_change_to_coord(tetra, count_sharp);
+		free(tetra);
 		ft_create_flist(count_sharp, coords_of_sharp, &head);
 		min_size = ft_count_min_s(count_sharp / 4);
 		coords_of_sharp = ft_move_zero_position_all(coords_of_sharp, count_sharp);
 		ft_fillit(&head, coords_of_sharp, min_size, count_sharp / 4);
+
+	//	free(head);
+		ft_del_list(&head);
+		free(coords_of_sharp);
 	}
 }

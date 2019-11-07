@@ -6,7 +6,7 @@
 /*   By: rkina <rkina@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 21:56:11 by rkina             #+#    #+#             */
-/*   Updated: 2019/11/06 18:19:34 by rkina            ###   ########.fr       */
+/*   Updated: 2019/11/07 20:44:43 by rkina            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ int			ft_count_neigh(int i, char *s)
 
 void		ft_valid_corr_tet(char *str)
 {
-	int		i;
-	int		sum_nghrs;
+	int 	i;
+	int 	sum_nghrs;
 
 	i = 0;
 	sum_nghrs = 0;
@@ -60,12 +60,15 @@ char		*ft_valid_tetra(const int fd)
 	{
 		tmp = tetra;
 		tetra = ft_strjoin(tetra, line);
+		free(tmp);
+		free(line);
 	}
 	while (tetra[i])
 	{
 		tmp1 = ft_strsub(&tetra[i], 0, 16);
 		i += 16;
 		ft_valid_corr_tet(tmp1);
+		free(tmp1);
 	}
 	return (tetra);
 }

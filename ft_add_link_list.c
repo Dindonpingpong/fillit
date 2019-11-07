@@ -6,23 +6,44 @@
 /*   By: rkina <rkina@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 17:37:27 by npetrell          #+#    #+#             */
-/*   Updated: 2019/11/06 18:23:02 by rkina            ###   ########.fr       */
+/*   Updated: 2019/11/07 20:44:41 by rkina            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 #include <stdio.h>
 
-void			create_flist(t_flist **head, char name_tetra)
+void			reverse(t_flist **head)
+{
+	t_flist		*prev;
+	t_flist		*current;
+	t_flist		*next;
+
+	prev = NULL;
+	current = *head;
+	next = NULL;
+	while (current != NULL)
+	{
+		next = current->next;
+		current->next = prev;
+		prev = current;
+		current = next;
+	}
+	*head = prev;
+}
+
+t_flist			*create_flist(t_flist *head, char name_tetra)
 {
 	t_flist		*new_node;
-	t_flist		*tmp;
 
 	new_node = (t_flist*)malloc(sizeof(t_flist));
 	new_node->name = name_tetra;
-	new_node->next = *head;
-	tmp = *head;
-	*head = new_node;
+	new_node->next = head;
+	new_node->prev = NULL;
+	if (head != NULL)
+		head->prev = new_node;
+	head = new_node;
+	return (head);
 }
 
 int				*ft_move_zero_position_all(int *coord, int len)
@@ -58,21 +79,26 @@ void			ft_create_flist(int count_sharp, int *coord_of_sharp,
 {
 	int			count_tetra;
 	int			i;
+	int			j;
 	char		name_tetra;
+	t_flist		*tmp;
 
 	name_tetra = 'A';
 	count_tetra = count_sharp / 4;
 	coord_of_sharp = ft_move_zero_position_all(coord_of_sharp, count_sharp * 2);
+	j = 0;
 	while (count_tetra-- > 0 && head)
 	{
 		i = 0;
-		create_flist(head, name_tetra);
+		tmp = *head;
+		*head = create_flist(*head, name_tetra);
 		while (i < 8)
 		{
-			(*head)->crd_sharp[i] = *coord_of_sharp;
-			coord_of_sharp++;
+			(*head)->crd_sharp[i] = coord_of_sharp[j];
 			i++;
+			j++;
 		}
 		name_tetra++;
 	}
+	reverse(head);
 }
